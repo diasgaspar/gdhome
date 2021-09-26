@@ -1,0 +1,27 @@
+Dependencias
+$ composer require twbs/bootstrap:4.5.0
+$ composer dump-autoload --optimize
+$ composer install --no-dev --optimize-autoloader
+
+Para ser possivel fazer o deploy via ftp
+$ sudo pear install Net_FTP
+
+Virtual hosts:
+$ sudo cp /etc/apache2/sites-available/example.com.conf /etc/apache2/sites-available/gdhome.conf
+$ sudo a2ensite gdhome.conf
+Next, disable the default site defined in 000-default.conf:
+$ sudo a2dissite 000-default.conf
+$ sudo systemctl restart apache2
+
+
+Build, deploy:
+dentro do dir root do gdhomed:
+$ phing buildlocal
+$ cp -R build/* /var/www/html/gdhome/
+
+<ftpdeploy host="f6-preview.awardspace.net" port="21" username="1171664_whome" password="digimon1234" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
+<ftpdeploy host="f6-preview.awardspace.net" port="21" username="1171664_whome" password="digimon1234" dir="gdhome.com" mode="ascii" clearfirst="true" passive="true">
+<ftpdeploy host="gdhomed.atwebpages.com" port="21" username="1166243" password="digimon1234" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
+
+http://f6-preview.awardspace.net/gdhome.com
+

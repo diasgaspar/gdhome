@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="./tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+    
+    <php>
+        <var name="DB_DSN" value="mysql:dbname=whome;host=localhost" /> <!--mysql:dbname=1171664_whome;host=localhost-->
+        <var name="DB_USER" value="root" />
+        <var name="DB_PASSWD" value="digimon1234" />
+        <var name="DB_DBNAME" value="whome" />
+    </php>
+    
+
+</phpunit>

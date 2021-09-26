@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gdhome" default="dist">
+<property name="builddir" value="./build" override="true" />
+    <!-- ============================================  -->
+    <!-- Target: prepare                               -->
+    <!-- ============================================  -->
+    <target name="prepare">
+        <echo msg="Removing directory ./build" />
+        <delete dir="${builddir}" />
+        <echo msg="Making directory ./build" />
+        <mkdir dir="${builddir}" />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: build                                 -->
+    <!-- ============================================  -->
+    <target name="build" depends="prepare">
+        <copy todir="${builddir}/app" overwrite="true">
+            <fileset refid="appfiles" />
+        </copy>
+        <copy todir="${builddir}" overwrite="true">
+            <fileset refid="rootfiles" />
+        </copy>
+        <copy todir="${builddir}/vendor" overwrite="true">
+            <fileset refid="vendorfiles" />
+        </copy>
+         <copy todir="${builddir}/resources/bootstrap">
+            <fileset refid="bootstrap" />
+        </copy>
+         <copy todir="${builddir}/css">
+            <fileset refid="css" />
+        </copy>
+    </target>
+    
+    <target name="buildlocal" depends="prepare">
+        <copy todir="${builddir}/app">
+            <fileset refid="appfiles" />
+        </copy>
+        <copy todir="${builddir}">
+            <fileset refid="rootfiles" />
+        </copy>
+        <copy todir="${builddir}/vendor">
+            <fileset refid="vendorfiles" />
+        </copy>
+       <!-- <copy todir="${builddir}/tests">
+            <fileset refid="testfiles" />
+        </copy>-->
+        <copy todir="${builddir}/resources/bootstrap">
+            <fileset refid="bootstrap" />
+        </copy>
+        <copy todir="${builddir}/css">
+            <fileset refid="css" />
+        </copy>
+        
+        <copy file="phpunit.xml" tofile="${builddir}/phpunit.xml" overwrite="true"/>
+    </target>
+    
+    
+    <fileset dir="./app" id="appfiles">
+        <include name="**" />
+        <exclude name="gdhome/**.db"/>
+        <exclude name="gdhome/**.dbo"/>
+    </fileset>
+    
+     <fileset dir="." id="rootfiles">
+        <include name="**.php" />
+    </fileset>
+    
+    <fileset dir="./resources/bootstrap" id="bootstrap">
+        <include name="**" />
+    </fileset>
+    
+    <fileset dir="./css" id="css">
+        <include name="**" />
+    </fileset>
+    
+    <fileset dir="./vendor" id="vendorfiles">
+        <include name="autoload.php" />
+        <include name="composer/**.php" />
+    </fileset>
+    
+     <fileset dir="./tests" id="testfiles">
+        <include name="**" />
+    </fileset>
+
+    <!-- ============================================  -->
+    <!-- (DEFAULT)  Target: dist                       -->
+    <!-- ============================================  -->
+    <target name="dist" depends="build">
+        <echo msg="Creating archive..." />
+
+        <tar destfile="./build/build.tar.gz" compression="gzip">
+            <fileset dir="./build">
+                <include name="*" />
+                
+            </fileset>
+        </tar>
+
+        <echo msg="Files copied and compressed in build directory OK!" />
+    </target>
+    
+    <target name="deploy" depends="build">
+        <copy file="db_info_deploy.php" tofile="${builddir}/db_info.php" overwrite="true"/>
+        <ftpdeploy host="f6-preview.awardspace.net" port="21" username="1171664_whome" password="digimon1234" dir="gdhome.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
+            <fileset dir="${builddir}">
+                <include name="**"/>
+                <exclude name="phing"/>
+                <exclude name="build.xml"/>
+                <exclude name="images/**.png"/>
+                <exclude name="images/**.gif"/>
+                <exclude name="images/**.jpg"/>
+            </fileset>
+        </ftpdeploy>		
+    </target>
+    
+      <target name="locald" >
+          <exec command="ls" dir="." passthru="true"/>
+
+    </target>
+</project>
