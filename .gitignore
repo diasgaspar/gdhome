@@ -9,4 +9,5 @@
 /vendor/
 /db_info.php
 /app/gdhome/DB_Info.php
+/build/*
 ###< symfony/framework-bundle ###

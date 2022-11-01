@@ -19,6 +19,14 @@ dentro do dir root do gdhomed:
 $ phing buildlocal
 $ cp -R build/* /var/www/html/gdhome/
 
+
+composer dump-autoload --optimize
+composer install --no-dev --optimize-autoloader
+phing buildlocal
+phing build
+phing deploy
+
+
 <ftpdeploy host="f6-preview.awardspace.net" port="21" username="1171664_whome" password="digimon1234" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
 <ftpdeploy host="f6-preview.awardspace.net" port="21" username="1171664_whome" password="digimon1234" dir="gdhome.com" mode="ascii" clearfirst="true" passive="true">
 <ftpdeploy host="gdhomed.atwebpages.com" port="21" username="1166243" password="digimon1234" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
