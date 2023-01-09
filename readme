@@ -27,9 +27,9 @@ phing build
 phing deploy
 
 
-<ftpdeploy host="f6-preview.awardspace.net" port="21" username="1171664_whome" password="digimon1234" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
-<ftpdeploy host="f6-preview.awardspace.net" port="21" username="1171664_whome" password="digimon1234" dir="gdhome.com" mode="ascii" clearfirst="true" passive="true">
-<ftpdeploy host="gdhomed.atwebpages.com" port="21" username="1166243" password="digimon1234" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
+<ftpdeploy host="f6-preview.awardspace.net" port="21" username="<username>" password="<pass>" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
+<ftpdeploy host="f6-preview.awardspace.net" port="21" username="<username>" password="<pass>" dir="gdhome.com" mode="ascii" clearfirst="true" passive="true">
+<ftpdeploy host="gdhomed.atwebpages.com" port="21" username="<username>" password="<pass>" dir="gdhomed.atwebpages.com" mode="ascii" clearfirst="true" passive="true">
 
 http://f6-preview.awardspace.net/gdhome.com
 
